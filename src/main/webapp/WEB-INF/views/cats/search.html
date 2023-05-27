@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search cat</title>
+</head>
+<body>
+<form th:action="@{/cats/searchCat}" method="POST">
+    <label for="name">Insert name of cat to search : </label>
+    <input type="text" name="name" id="name" placeholder="Find book by Name" size="100">
+    <button type="submit" class="btn btn-info">Search</button>
+</form>
+
+<div th:if="${cats}">
+    <div th:if="${cats.isEmpty()}">
+        <span>Cat does not found</span>
+    </div>
+    <div th:each="cat : ${cats}">
+        <p th:text="${cat.getName() + ', ' + cat.getAge() + ', ' + cat.getColor()}">cat</p>
+        <div th:if="${cat.getOwner() != null}">
+            <span>Cat now at: </span> <span th:text="${cat.getOwner().getFullName()}">Person Name</span>
+        </div>
+        <div th:if="${cat.getOwner() == null}">
+            <span>Cat free</span>
+        </div>
+        <hr/>
+    </div>
+</div>
+</body>
+</html>
